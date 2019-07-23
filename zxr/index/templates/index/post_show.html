@@ -1,0 +1,129 @@
+{% extends 'index/base.html' %}
+{% load staticfiles %}
+{% block head_mark %}{% endblock %}
+{% block head_link %}
+    <link rel="stylesheet" type="text/css" href="{% static 'plug_in/simditor/styles/simditor.css' %}"/>
+{% endblock %}
+{% block recommend %}
+    <div class="post_title">
+        “{{ post.title }}”
+    </div>
+{% endblock %}
+{% block body %}
+    {# 网页身体 #}
+    <div class="ch_bg_color_gainsboro">
+        {# 网页身体 #}
+        <div class="container">
+            <div class="row ch_body">
+                {# 文章内容 #}
+                <div class="col-lg-8 post">
+                    <div class="post_title">
+                        <div class="author"><img src="{% static 'images/author.svg' %}">{{ post.author.username }}</div>
+                        <div class="time"><img src="{% static 'images/calendar.svg' %}">{{ post.modify_date | date:"Y-n-d,H:i:s" }}</div>
+                        <div class="read"><img src="{% static 'images/views.svg' %}">{{ post.pv }}</div>
+                        <div class="review"><img src="{% static 'images/comments.svg' %}">{{ post.post_comment_count }}</div>
+                    </div>
+                    <div class="post_content">
+                        {{ post.content|safe }}
+                    </div>
+                    <div class="post_review">
+                        {# 评论列表 #}
+                        <div class="title">发表评论:</div>
+                        {% if user.is_authenticated %}
+                            <form id="comment" method="POST" action="{% url 'index:post_comment' %}">
+                                {% csrf_token %}
+                                {# 隐藏域 #}
+                                <input type="hidden" name="post_id" value="{{ post.id }}">
+                                <textarea
+                                        id="rich_text_comment"
+                                        name="comment"
+                                        class="form-control"
+                                        style="height: 150px"></textarea>
+                                <p></p>
+                                <input type="submit" class="btn btn-default btn-success btn-block"
+                                       value="发表评论">
+                            </form>
+                        {% else %}
+                            <p><a href="{% url 'index:login_page' %}">登陆后便可评论哦！</a></p>
+                        {% endif %}
+                        <div class="review_list">
+                            {% for comment in comment_list %}
+                                <div class="review">
+                                    <div class="author">评论者&nbsp;&nbsp;:{{ comment.author.username }}</div>
+                                    {# 可以删除自己的评论 #}
+                                    {% if user.is_authenticated %}
+                                        {% if comment.author == user %}
+                                            <div class="delete">
+                                                <a href="{% url 'index:post_comment_delete' comment.id %}">删除</a>
+                                            </div>
+                                        {% endif %}
+                                    {% endif %}
+                                    <div class="content">
+                                        {{ comment.content|safe }}
+                                    </div>
+                                    <div class="time">{{ comment.create_date | date:"Y-n-d,H:i:s" }}</div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        {# 评论分页器 #}
+                        {% if comment_count >= 15 %}
+                            <div class="review_page">
+                                <ul>
+                                    {% for p in page_range %}
+                                        <li {% if p == comment_page %}class="active" {% endif %}>
+                                            <a href="{% url 'index:post_show' post.id p %}">{{ p }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                {# 相关资讯 #}
+                <div class="col-lg-4">
+                    <div class="ch_title" style="margin-left: 31px">最新美食分享</div>
+                    {# 最新资讯列表 #}
+                    <div class="new_list">
+                        {% for post in new_posts %}
+                            <div class="new">
+                                <div class="title">
+                                    <a href="{% url 'index:post_show' post.id 1 %}">
+                                        <h4>{{ post.title|truncatechars:15 }}</h4>
+                                    </a>
+                                </div>
+                                <div class="content">{{ post.no_html_content|truncatechars:20 }}</div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}
+{% block script %}
+    <script type="text/javascript" src="{% static 'plug_in/simditor/scripts/module.js' %}"></script>
+    <script type="text/javascript" src="{% static 'plug_in/simditor/scripts/hotkeys.js' %}"></script>
+    <script type="text/javascript" src="{% static 'plug_in/simditor/scripts/uploader.js' %}"></script>
+    <script type="text/javascript" src="{% static 'plug_in/simditor/scripts/simditor.js' %}"></script>
+    <script>
+        var editor = new Simditor({
+            textarea: $('#rich_text_comment'),
+            toolbar: [
+                'title',
+                'bold',
+                'italic',
+                'underline',
+                'strikethrough',
+                'fontScale',
+                'color',
+                'ol',
+                'ul',
+                'blockquote',
+                'link',
+                'hr',
+                'indent',
+                'outdent',
+                'alignment'
+            ]
+        });
+    </script>
+{% endblock %}

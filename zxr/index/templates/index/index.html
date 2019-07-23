@@ -1,0 +1,95 @@
+{% extends 'index/base.html' %}
+{% load static %}
+{% block body %}
+    {# 网页身体 #}
+    <div class="ch_bg_color_gainsboro">
+        {# 网页身体 #}
+        <div class="container">
+            <div class="row ch_body">
+                {# 最新列表 #}
+                <div class="col-lg-8">
+                    <div class="ch_title" style="margin-left: -14px">最新分享</div>
+                    {# 文章列表 #}
+                    <div class="post_list">
+                        {% for post in new_posts %}
+                            <div class="row post">
+                                {# tag #}
+                                <a href="{% url 'index:post_show' post.id 1 %}">
+                                    <div class="post_tag"></div>
+                                </a>
+                                {# 封面 #}
+                                <div class="col-lg-4">
+                                    <div class="cover"
+                                            {% if post.cover %}
+                                         style="background: url({{ post.cover.url }}) center no-repeat"
+                                            {% endif %}
+                                    ></div>
+                                </div>
+                                {# 详情 #}
+                                <div class="col-lg-8">
+                                    <div class="title">{{ post.title|truncatechars:15 }}</div>
+                                    <div class="content">
+                                        {{ post.no_html_content|truncatechars:60 }}
+                                    </div>
+                                    <div class="info">
+                                        <div class="author"><img
+                                                src="{% static 'images/author.svg' %}">{{ post.author.username }}</div>
+                                        <div class="time"><img
+                                                src="{% static 'images/calendar.svg' %}">{{ post.modify_date | date:"Y-n-d,H:i:s" }}
+                                        </div>
+                                        <div class="reading"><img src="{% static 'images/views.svg' %}">{{ post.pv }}
+                                        </div>
+                                        <div class="comment"><img
+                                                src="{% static 'images/comments.svg' %}">{{ post.post_comment_count }}
+                                        </div>
+                                    </div>
+                                </div>
+                                {# 分类 #}
+                                <div class="post_category">
+                                    {{ post.category.name }}
+                                </div>
+                                {# 用户可以编辑自己发的文章 #}
+                                {% if user.is_authenticated %}
+                                    {% if user == post.author %}
+                                        <div class="post_edit">
+                                            <a href="{% url 'index:edit_post' post.id %}">编辑</a>,
+                                            <a href="{% url 'index:post_delete_post' post.id %}">删除</a>
+                                        </div>
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="ch_more">
+                        <a href="{% url 'index:post_list' 0 1 %}">
+                            更多精彩内容
+                        </a>
+                    </div>
+                </div>
+                {# 相关资讯 #}
+                <div class="col-lg-4">
+                    <div class="ch_title" style="margin-left: 31px">最新评论</div>
+                    {# 最新资讯列表 #}
+                    <div class="new_list">
+                        {% for comment in new_comments %}
+                            <div class="new">
+                                <div class="title">
+                                    <a href="{% url 'index:post_show' comment.post.id 1 %}">
+                                        <span>{{ comment.author.username }}</span>
+                                        评论了
+                                        <span>{{ comment.post.title|truncatechars:10 }}</span>
+                                    </a>
+                                </div>
+                                <div class="content">
+                                    <span class="colon">“</span>
+                                    {{ comment.no_html_content }}
+                                    <span class="colon">”</span>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}

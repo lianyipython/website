@@ -1,0 +1,89 @@
+{% extends 'index/base.html' %}
+{% load staticfiles %}
+{% block head_mark %}{% endblock %}
+{% block recommend %}
+    <div class="post_title">
+        “{{ request.user.username }},发表的文章”
+    </div>
+{% endblock %}
+{% block body %}
+    {# 网页身体 #}
+    <div class="ch_bg_color_gainsboro">
+        {# 网页身体 #}
+        <div class="container" style="min-height: 500px">
+            <div class="row ch_body">
+                {# 最新列表 #}
+                <div class="col-lg-12">
+                    {# 文章列表 #}
+                    <div class="post_list">
+                        {% for post in  posts %}
+                            <div class="row post">
+                                {# tag #}
+                                <a href="{% url 'index:post_show' post.id 1 %}">
+                                    <div class="post_tag"></div>
+                                </a>
+                                {# 封面 #}
+                                <div class="col-lg-2">
+                                    <div class="cover"
+                                         {% if post.cover %}
+                                            style="background: url({{ post.cover.url }}) center no-repeat"
+                                         {% endif %}
+                                         ></div>
+                                </div>
+                                {# 详情 #}
+                                <div class="col-lg-10">
+                                    <div class="title">{{ post.title|truncatechars:20 }}</div>
+                                    <div class="content">
+                                        {{ post.no_html_content|truncatechars:120|safe }}
+                                    </div>
+                                    <div class="info">
+                                        <div class="author"><img
+                                                src="{% static 'images/author.svg' %}">{{ post.author.username }}</div>
+                                        <div class="time"><img
+                                                src="{% static 'images/calendar.svg' %}">{{ post.modify_date | date:"Y-n-d,H:i:s" }}
+                                        </div>
+                                        <div class="reading"><img src="{% static 'images/views.svg' %}">{{ post.pv }}
+                                        </div>
+                                        <div class="comment"><img
+                                                src="{% static 'images/comments.svg' %}">{{ post.post_comment_count }}
+                                        </div>
+                                    </div>
+                                </div>
+                                {# 分类 #}
+                                <div class="post_category">
+                                    {{ post.category.name }}
+                                </div>
+                                {# 编辑 #}
+                                <div class="post_edit">
+                                    <a href="{% url 'index:edit_post' post.id %}">编辑</a>
+                                </div>
+                                {# 审核 #}
+                                {% if not post.check %}
+                                    <div class="post_checking">审核中</div>
+                                {% else %}
+                                    <div class="post_checked">已审核</div>
+                                {% endif %}
+                            </div>
+                        {% empty %}
+                            <div class="success">
+                                <blockquote>
+                                    <h2> 我还没有发表过任何文章~</h2>
+                                    <footer><a href="{% url 'index:index' %}">去看看大家的分享</a></footer>
+                                </blockquote>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    {# 分页器 #}
+                    <div class="review_page">
+                        <ul>
+                            {% for p in page_range %}
+                                <li {% if p == page %}class="active" {% endif %} >
+                                    <a href="{% url 'index:my_post_list' p %}">{{ p }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}

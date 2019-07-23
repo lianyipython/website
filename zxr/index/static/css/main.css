@@ -1,0 +1,484 @@
+/* 网页头部 */
+.ch_head{
+    padding-top: 30px;!important;
+    padding-bottom: 30px;!important;
+}
+
+/* 导航菜单的定义 */
+.ch_head ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    position: relative;
+    top: 40px;
+    left: -18px;
+}
+.ch_head ul>li{
+    float: left;
+    text-align: center;
+    width: 80px;
+    color: darkgrey;
+    border-color: gray;
+    border-left: 1px solid;
+}
+.ch_head ul>li>a:link,
+.ch_head ul>li>a:active,
+.ch_head ul>li>a:hover,
+.ch_head ul>li>a:visited{
+    color: #f7e3ae;
+    font-weight: bold;
+}
+
+
+/* 菜单部分 */
+.ch_head .navigation{
+    margin-bottom: 30px;
+}
+.ch_head .web_title{
+    font-weight: bold;
+    color: #ffffff;
+}
+
+/* 精彩推荐 */
+.ch_head .wonderful{}
+.ch_head .wonderful a:link,
+.ch_head .wonderful a:active,
+.ch_head .wonderful a:hover,
+.ch_head .wonderful a:visited{
+    color: #adadad;
+}
+
+.ch_head .wonderful .title{
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    text-align: center;
+    background: rgba(0,0,0,.5);
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: white;
+}
+.ch_head .wonderful .big_show{
+    height: 320px;
+    border: 1px solid #fdfdfd;
+    overflow: hidden;
+    box-shadow: 8px 8px 3px rgba(0,0,0,.5);
+    position: relative;
+}
+.ch_head .wonderful .small_show{
+    height: 150px;
+    margin-bottom: 20px;
+    border: 1px solid #fdfdfd;
+    overflow: hidden;
+    box-shadow: 8px 8px 3px rgba(0,0,0,.5);
+    position: relative;
+}
+.ch_head .wonderful img{
+    width: 100%;
+    height: auto;
+}
+
+/* 文章展示的标题 */
+.ch_head .post_title{
+    font-size: 2.5em;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    font-weight: bold;
+    text-shadow: 10px 11px 1px rgba(103, 103, 103,.5);
+    color: wheat;
+}
+
+/* 文章分类的标题 */
+.ch_head .category_title{
+    font-size: 2.5em;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    font-weight: bold;
+}
+
+
+/* 网页身体部分 */
+.ch_body{
+    padding-top: 40px;
+    padding-bottom: 90px;
+}
+
+/* 最新文章列表 */
+.ch_body .post_list{
+    position: relative;
+}
+.ch_body .post_list>.post{
+    margin-bottom: 20px;
+    border: 1px solid #eaeaea;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    position: relative;
+    background: white;
+}
+.ch_body .post_list>.post .cover{
+    width: 100%;
+    height: 118px;
+    background: #efe8e8;
+    overflow: hidden;
+}
+.ch_body .post_list>.post .post_tag{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+}
+.ch_body .post_list>.post .title{
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+.ch_body .post_list>.post .content{
+    color: gray;
+    padding-bottom: 32px;
+    letter-spacing: 0.1em;
+    height: 83px;
+}
+.ch_body .post_list>.post .info{
+    position: relative;
+    color: grey;
+}
+.ch_body .post_list>.post img{
+    width: 15px;
+    height: 15px;
+    position: relative;
+    right: 10px;
+    bottom: 2px;
+}
+
+.ch_body .post_list>.post .info>.author{
+    position: absolute;
+    bottom: 0;
+    left: 11px;
+}
+.ch_body .post_list>.post .info>.time{
+    position: absolute;
+    bottom: 0;
+    left: 150px;
+}
+.ch_body .post_list>.post .info>.comment{
+    position: absolute;
+    bottom: 0;
+    right: 90px;
+}
+.ch_body .post_list>.post .info>.reading{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+.ch_body .post_list>.post .post_category{
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: beige;
+    padding: 5px;
+    color: darkgray;
+    font-size: .8em;
+}
+.ch_body .post_list>.post .post_edit{
+    position: absolute;
+    right: 50px;
+    top: 0;
+    background: #b3defd;
+    padding: 5px;
+    color: darkgray;
+    font-size: .8em;
+    z-index: 2000;
+}
+.ch_body .post_list>.post .post_checking{
+    position: absolute;
+    right: 100px;
+    top: 0;
+    background: #ff5400;
+    padding: 5px;
+    color: white;
+    font-size: .8em;
+}
+.ch_body .post_list>.post .post_checked{
+    position: absolute;
+    right: 100px;
+    top: 0;
+    background: #4265ff;
+    padding: 5px;
+    color: white;
+    font-size: .8em;
+}
+
+
+/* 最新消息列表 */
+.ch_body .new_list{
+    padding-left: 30px;
+    padding-bottom: 30px;
+}
+.ch_body .new_list>.new{
+    margin-bottom: 20px;
+    border-color: gainsboro;
+    padding-bottom: 12px;
+    border-bottom-style: solid;
+}
+.ch_body .new_list>.new>.title{
+    font-size: 1.1em;
+    padding-bottom: 10px;
+}
+.ch_body .new_list>.new>.content{
+    color: gray;
+}
+.ch_body .new_list>.new .colon{
+    font-weight: bold;
+}
+
+/* 文章发布 */
+.ch_body .post_publish{
+    width: 100%;
+    border: 1px solid gainsboro;
+    padding: 50px 30px;
+    box-shadow: 5px 5px 0 rgba(0,0,0,.02);
+    background: #fffefb;
+}
+
+/* 成功信息显示 */
+.ch_body .success{
+    width: 100%;
+    padding-top: 180px;
+    padding-bottom: 200px;
+}
+
+/* 文章展示 */
+.ch_body>.post{}
+.ch_body>.post>.post_title{
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    font-size: 1.2em;
+    position: relative;
+    font-weight: bold;
+}
+.ch_body>.post>.post_title img{
+    width: 15px;
+    height: 15px;
+    position: relative;
+    margin-right: 10px;
+    top: -2px;
+}
+.ch_body>.post>.post_title>.time{
+    position: absolute;
+    right: 180px;
+    font-size: .8em;
+}
+.ch_body>.post>.post_title>.author{
+    position: absolute;
+}
+.ch_body>.post>.post_title>.read{
+    position: absolute;
+    right: 86px;
+    font-size: .8em;
+}
+.ch_body>.post>.post_title>.review{
+    position: absolute;
+    right: 0;
+    font-size: .8em;
+}
+.ch_body>.post>.post_content{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    background: white;
+    border: 1px solid gainsboro;
+    padding: 30px;
+    box-shadow: 5px 5px 0 rgba(0,0,0,.02);
+}
+.ch_body>.post>.post_review{}
+.ch_body>.post>.post_review>.title{
+    font-size: 1.2em;
+    border-top: 1px solid rgb(220, 220, 220);
+    padding-top: 20px;
+    color: rgb(128, 128, 128);
+    margin-bottom: 20px;
+}
+.ch_body>.post>.post_review>.review_list{}
+.ch_body>.post>.post_review>.review_list>.review{
+    background: rgba(0,0,0,.02);
+    margin-bottom: 20px;
+    box-shadow: 10px 10px 0 rgba(0,0,0,0.05);
+    position: relative;
+    margin-top: 70px;
+}
+.ch_body>.post>.post_review>.review_list>.review>.author{
+    position: absolute;
+    top: -40px;
+    background: rgb(250, 250, 250);
+    padding: 10px;
+    font-weight: bold;
+}
+.ch_body>.post>.post_review>.review_list>.review>.delete{
+    position: absolute;
+    top: -40px;
+    padding: 10px;
+    left: 153px;
+}
+.ch_body>.post>.post_review>.review_list>.review>.content{
+    padding: 25px;
+    font-size: 1.1em;
+}
+.ch_body>.post>.post_review>.review_list>.review>.content>.quotation{
+    font-weight: bolder;
+    font-size: 1.2em;
+}
+.ch_body>.post>.post_review>.review_list>.review>.time{
+    position: absolute;
+    top: -20px;
+    right: 0;
+    color: grey;
+}
+
+
+/* 分页器 */
+.review_page{
+    padding-top: 20px;
+}
+.review_page>ul{
+    margin: 0;
+    padding: 0;
+    list-style: None;
+}
+.review_page>ul>li{
+    float: left;
+    text-align: center;
+    background: gainsboro;
+    margin-right: 10px;
+    padding: 5px 15px;
+    cursor: pointer;
+    border-radius: 42px;
+}
+.review_page>ul .active{
+    background: #f43216;!important;
+}
+.review_page>ul>li>a:link,
+.review_page>ul>li>a:active,
+.review_page>ul>li>a:hover,
+.review_page>ul>li>a:visited{
+    color: white;
+}
+
+
+
+/* 用户账户相关 */
+.account{
+    margin-top: 80%;
+    border: 1px solid gainsboro;
+    background: white;
+    padding: 30px;
+    box-shadow: 5px 5px 2px rgba(0,0,0,0.05);
+    border-radius: 5px;
+}
+.account>.title{
+    text-align: center;
+    font-size: 1.5em;
+    padding-bottom: 30px;
+}
+.account>.error_msg{
+    background: rgb(255, 0, 0);
+    padding: 10px;
+    margin-bottom: 30px;
+    color: white;
+    box-shadow: 3px 3px 0 rgba(0,0,0,.1);
+}
+
+    /* 标题和更多 */
+.ch_title{
+    font-size: 1.5em;
+    margin-bottom: 15px;
+    border-left: 5px solid darkgray;
+    padding-left: 15px;
+    position: relative;
+}
+.ch_more{
+    width: 100%;
+    text-align: center;
+    font-size: 1.2em;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+/* 页脚部分 */
+.ch_foot{
+    position: relative;
+}
+.ch_foot .foot_decorate{
+    width: 221px;
+    height: 60px;
+    position: absolute;
+    right: 110px;
+    top: -58px;
+}
+.ch_foot .info{
+    text-align: center;
+    font-size: 1.2em;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    color: white;
+
+}
+
+/* 吃货平台的操作按钮 */
+.ch_btn_group{
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    padding: 20px;
+}
+.ch_btn_group>ul{
+    list-style: None;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+.ch_btn_group>ul>li{
+    background: #b3defd;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: -5px 5px 0 rgba(0, 0, 0, 0.03);
+}
+
+/* 补充性零散的css */
+.head_background{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    background: rgb(253, 253, 253);
+    z-index: -20;
+    border-bottom: 3px solid rgb(9, 18, 15);
+}
+.head_mark{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    background: rgba(0,0,0,.7);
+    z-index: -10;
+}
+
+.go_stroll{
+    text-align: center;
+    padding-top: 30px;
+}
+
+/* 通用的颜色定义 */
+.ch_bg_color{
+    background: slategray;!important;
+}
+
+.ch_bg_color_gainsboro{
+    background-color: #fdfdfd!important;
+    min-height: 1000px;
+}
+
+.ch_bg_color_A7DBD8{
+    background-color: #A7DBD8;
+}

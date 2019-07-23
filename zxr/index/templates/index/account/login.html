@@ -1,0 +1,79 @@
+<html lang="zh-CN">
+<head>
+    {% load staticfiles %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>边看边注册</title>
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/main.css' %}" rel="stylesheet">
+</head>
+<body style="background: url({% static 'images/login_background.jpg' %}) center no-repeat">
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4"></div>
+        <div class="col-lg-4">
+            <div class="account">
+                {% if error_msg %}
+                    <div class="error_msg">{{ error_msg }}</div>
+                {% endif %}
+                <div class="title">登录影评分享平台</div>
+                <form id="login" method="post" action="{% url 'index:login' %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label>登录名</label>
+                        <input type="text"
+                               class="form-control"
+                               id="username"
+                               name="username"
+                               placeholder="您的登录名">
+                    </div>
+                    <div class="form-group">
+                        <label>登录密码</label>
+                        <input type="password"
+                               id="password"
+                               name="password"
+                               class="form-control"
+                               placeholder="您的登录密码">
+                    </div>
+                    <input type="submit" class="btn btn-success btn-block" value="登录">
+                    <a href="{% url 'index:register_page' %}" class="btn btn-primary btn-block">注册</a>
+                    <div class="go_stroll"><a href="{% url 'index:index' %}">先去随便逛逛</a></div>
+                </form>
+            </div>
+        </div>
+        <div class="col-lg-4"></div>
+    </div>
+</div>
+</body>
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+<script>
+    $(function () {
+        $("#login").validate({
+            rules: {
+                username: {
+                    required: true,
+                    minlength: 6
+                },
+                password: {
+                    required: true,
+                    minlength: 6
+                }
+            },
+            messages: {
+                username: {
+                    required: "请输入用户名",
+                    minlength: "用户名必需由6个字母组成"
+                },
+                password: {
+                    required: "请输入密码",
+                    minlength: "密码长度不能小于 6 个字母"
+                }
+            }
+        })
+    });
+</script>
+</html>

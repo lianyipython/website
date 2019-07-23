@@ -1,0 +1,146 @@
+{% extends 'index/base.html' %}
+{% load staticfiles %}
+{% block head_mark %}{% endblock %}
+{% block head_link %}
+    <link rel="stylesheet" type="text/css" href="{% static 'plug_in/simditor/styles/simditor.css' %}"/>
+{% endblock %}
+{% block recommend %}
+    <div class="post_title">
+        “发表一篇影评吧~”
+    </div>
+{% endblock %}
+{% block body %}
+    {# 网页身体 #}
+    <div class="ch_bg_color_gainsboro">
+        {# 网页身体 #}
+        <div class="container">
+            <div class="row ch_body">
+                <div class="col-lg-2"></div>
+                <div class="col-lg-8">
+                    {# 发表文章的表单 #}
+                    <div class="post_publish">
+                        <form id="post_publish"
+                              method="post"
+                              enctype="multipart/form-data"
+                              action="{% url 'index:post_publish' %}">
+                            {% csrf_token %}
+                            {# 隐藏域 #}
+                            <input name="post_id" value="{{ post.id|default:0 }}" type="hidden">
+                            <div class="form-group">
+                                <label>分享标题</label>
+                                <input type="text"
+                                       id="title"
+                                       name="title"
+                                       class="form-control"
+                                       placeholder="文章标题"
+                                       value="{{ post.title|default:'' }}">
+                            </div>
+                            <div class="form-group">
+                                <label>给分享的文章选个封面</label>
+                                <input type="file"
+                                       name="cover"
+                                       accept="image/png,image/jpeg">
+                                <p class="help-block">
+                                    {% if post %}
+                                        {% if post.cover %}
+                                            <img src="{{ post.cover.url }}" style="width: 200px">
+                                        {% endif %}
+                                    {% endif %}
+                                </p>
+                            </div>
+                            <div class="form-group">
+                                <label>分享分类</label>
+                                <select name="category_id"
+                                        class="form-control">
+                                    {% for category in  categories %}
+                                        <option value="{{ category.id }}"
+                                                {% if post.category.id == category.id %}
+                                                selected
+                                                {% endif %}
+                                        >{{ category.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>分享内容</label>
+                                <textarea
+                                        id="content"
+                                        name="content"
+                                        class="form-control"
+                                        style="height: 300px">{{ post.content }}</textarea>
+                            </div>
+                            <input type="submit" class="btn btn-default btn-success btn-block"
+                                    {% if not post %}
+                                   value="发布分享"
+                                    {% else %}
+                                   value="编辑"
+                                    {% endif %}  >
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-2"></div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}
+{% block script %}
+    <script type="text/javascript" src="{% static 'plug_in/simditor/scripts/module.js' %}"></script>
+    <script type="text/javascript" src="{% static 'plug_in/simditor/scripts/hotkeys.js' %}"></script>
+    <script type="text/javascript" src="{% static 'plug_in/simditor/scripts/uploader.js' %}"></script>
+    <script type="text/javascript" src="{% static 'plug_in/simditor/scripts/simditor.js' %}"></script>
+    <script>
+        $(function () {
+            $("#post_publish").validate({
+                rules: {
+                    title: {
+                        required: true,
+                        minlength: 2
+                    },
+                    content: {
+                        required: true,
+                        minlength: 15
+                    }
+                },
+                messages: {
+                    title: {
+                        required: "分享内容必须要有一个标题哦",
+                        minlength: "必需由2个字母组成"
+                    },
+                    content: {
+                        required: "您的分享必须要有内容哦？",
+                        minlength: "密码长度不能小于 6 个字母"
+                    }
+                }
+            });
+
+            // 富客户端编辑器
+            var editor = new Simditor({
+                textarea: $('#content'),
+                toolbar: [
+                    'title',
+                    'bold',
+                    'underline',
+                    'fontScale',
+                    'color',
+                    'ol',
+                    'ul',
+                    'blockquote',
+                    'link',
+                    'hr',
+                    'indent',
+                    'outdent',
+                    'alignment',
+                    'image'
+                ],
+                upload: {
+                    url: '{% url "index:post_image_save" %}',
+                    params: null,
+                    fileKey: 'image',
+                    connectionCount: 3,
+                    leaveConfirm: 'Uploading is in progress, are you sure to leave this page?'
+                }
+            });
+        });
+    </script>
+{% endblock %}
+{% block side_menu %}{% endblock side_menu %}
