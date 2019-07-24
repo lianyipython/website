@@ -3,8 +3,8 @@
   
 一 部署开发环境:  
 1) 安装python3.6.X  
-2）使用pip命令安装一下包:      
------ pip install django==1.11.2    
+2）使用pip命令安装一下包:    
+----- pip install django==1.11.2  
 ----- pip install pillow  
 ----- pip install django-tinymce  
   
